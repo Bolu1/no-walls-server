@@ -79,6 +79,7 @@ module.exports = buildSchema(
      createClass(classInput: ClassInput): Class
      createPost(post: String! media: String id: ID!): Post
      joinClass(id: ID!, password: String!): Class
+     editUser(name:String!, password:String!, newPassword:String, profile:String): User
  }
 
  schema{

@@ -13,6 +13,33 @@ module.exports =
         const user = await User.find()
         return user
     },
+
+    editUser: async(args:any, req:any) =>{
+        try{
+            const pass = await bcrypt.hash(args.newPassword, 12)
+            if(!req.isAuth){
+                throw new Error('Unauthenticated')
+            }
+            const user = await User.findOne({_id: req.userId})
+            if(!user){
+                throw new Error("User does not exist")
+            }
+            const valid = await bcrypt.compare(args.password, user.password)
+            
+            if(args.newPassword && !valid){
+                console.log(args.newPassword)
+                throw new Error("Incorrect Password")
+            }
+            user.name = args.name
+            user.password = args.newPassword?pass: user.password
+            user.profile = args.profile?args.profile: user.profile
+            await user.save()
+            return user
+        }catch(error){
+            console.log(error)
+        }
+    },
+
     createUser: async(args:any) =>{
         try{
         const exists = await User.find({email: args.userInput.email})
