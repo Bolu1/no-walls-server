@@ -31,7 +31,7 @@ module.exports = buildSchema(
      profile: String
      info: String
      teacher: User
-     memebers: [User]
+     members: [User]
      createdAt: String!
      updatedAt: String!
 

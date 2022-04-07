@@ -14,7 +14,8 @@ const PORT = process.env.PORT || 5000
 const GraphQLSchema = require('./graphql/schema/index')
 const GraphQLResolvers = require('./graphql/resolvers/index')
 
-const CONNECTION_URL  = 'mongodb+srv://user_0:user_0@cluster0.llrik.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+// const CONNECTION_URL  = 'mongodb+srv://user_0:user_0@cluster0.llrik.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const CONNECTION_URL = 'mongodb://localhost:27017/nowalls'
 mongoose.connect(CONNECTION_URL, ()=>{
     console.log(colors.rainbow("DB connected"))
 })

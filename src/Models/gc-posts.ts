@@ -8,6 +8,7 @@ const postSchema = new Schema({
         ref: 'Classgc',
         required: true
     },
+    createdAt: {type:String},
     user:{
         type: Schema.Types.ObjectId,
         ref: 'Usergc',
@@ -21,8 +22,6 @@ const postSchema = new Schema({
         type: String
     }
 
-},{
-    timestamps: true
 })
 
 module.exports = mongoose.model('Posts', postSchema)
