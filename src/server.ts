@@ -44,6 +44,10 @@ app.use('/graphql', expressGraphQL({
     graphiql: true
 }))
 
+app.get('/', (req:any,res:any)=>{
+    res.send("welcome")
+})
+
 app.listen(PORT, ()=>{
     console.log(colors.random(`Server is running on https://localhost:${PORT}`))
 }) 
