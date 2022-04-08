@@ -16,6 +16,25 @@ module.exports =
             console.log(error)
         }
     },
+    getSubmission: async(args:any, req:any)=>{
+        try{  
+            const PAGE_SIZE = 20
+            const page = args.page || 1
+            if(!req.isAuth){
+                throw new Error('Unauthenticated')
+            }
+            const res = await Post.find({assignmentId:args.id}).populate('assignmentId').populate('user').limit(PAGE_SIZE* page)
+            if(!res[0]){
+                throw new Error("No submissions yet")
+            }
+            if(res[0].assignmentId.user != req.userId){
+                throw new Error("Unauthorized")
+            }
+            return res
+        }catch(error){
+            console.log(error)
+        }
+    },
     createPost: async (args:any, req:any) =>{
         try{
         if(!req.isAuth){
@@ -44,6 +63,7 @@ module.exports =
             // })
             const p = {
                 classId: args.id,
+                assignmentId: args.id1,
                 user: req.userId, 
                 createdAt: ca,
                 post: args.post,

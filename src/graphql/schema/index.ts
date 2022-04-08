@@ -18,12 +18,24 @@ module.exports = buildSchema(
  type Post{
      _id: ID!
      classId: Class
+     assignmentId: Assignment
      user: User
      post: String!
      media: String
      createdAt: String!
      updatedAt: String!
  }
+
+ type Assignment{
+    _id: ID!
+    classId: Class
+    user: User
+    post: String
+    media: String
+    submission: Post
+    dueDate: String
+    createdAt: String!
+}
 
  type Class{
      _id: ID! 
@@ -67,17 +79,20 @@ module.exports = buildSchema(
 
  type RootQuery{
      users: [User!]!
+     assignments(id: ID!): [Assignment]
      class: [Class!]!
      getClass: [Class]
      getOneClass(id:ID!):Class
+     getSubmission(id: ID!, page:Int): [Post]
      posts(id: ID!, page:Int): [Post]!
      login(email:String!, password: String!): AuthData!
  }
 
  type RootMutation{
      createUser(userInput: UserInput): User 
+     createAssignment(id:ID! dueDate:String post:String media:String ):Assignment
      createClass(classInput: ClassInput): Class
-     createPost(post: String! media: String id: ID!): Post
+     createPost(post: String! media: String id: ID id1:ID): Post
      joinClass(id: ID!, password: String!): Class
      editUser(name:String!, password:String!, newPassword:String, profile:String): User
  }

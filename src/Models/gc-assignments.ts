@@ -2,15 +2,13 @@ import mongoose from 'mongoose'
 
 const Schema = mongoose.Schema
 
-const postSchema = new Schema({
+const assignmentSchema = new Schema({
     classId:{
         type: Schema.Types.ObjectId,
         ref: 'Classgc',
+        required: true
     },
-    assignmentId:{
-        type: Schema.Types.ObjectId,
-        ref: 'Assignmentgc',
-    },
+    dueDate: {type:String},
     createdAt: {type:String},
     user:{
         type: Schema.Types.ObjectId,
@@ -23,8 +21,13 @@ const postSchema = new Schema({
     },
     media:{
         type: String
+    },
+    submission:{
+        type: [String],
+        ref: 'Posts'
+
     }
 
 })
 
-module.exports = mongoose.model('Posts', postSchema)
+module.exports = mongoose.model('Assignmentgc', assignmentSchema)
